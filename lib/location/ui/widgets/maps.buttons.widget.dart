@@ -1,3 +1,4 @@
+import 'package:find_me/ui/custom.snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,9 +25,13 @@ class MapsButtonsWidget extends StatelessWidget {
             
             final position = locationBloc.state.currentLocation;
 
-            if ( position != null ) {
-              mapsBloc.moveCamera( position: position );
+            if ( position == null ) {
+              final snack = CustomSnackbar( message: 'No se ha encontrado su ubicación.' );
+              ScaffoldMessenger.of( context ).showSnackBar( snack );
+              return;
             }
+            
+            mapsBloc.moveCamera( position: position );
           },
           child: const Icon( Icons.gps_fixed_outlined, color: Colors.black ))
       ],

@@ -1,9 +1,11 @@
-import 'package:find_me/location/bloc/location.bloc.dart';
-import 'package:find_me/location/ui/widgets/maps.buttons.widget.dart';
-import 'package:find_me/location/ui/widgets/maps.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'package:find_me/location/bloc/location.bloc.dart';
+import 'package:find_me/location/ui/widgets/maps.buttons.widget.dart';
+import 'package:find_me/location/ui/widgets/maps.widget.dart';
+
 
 class LocationView extends StatefulWidget {
 
@@ -69,9 +71,11 @@ class _LocationViewState extends State<LocationView> {
     return SingleChildScrollView(
       child: Stack(
         children: [
+          
           MapsWidget( position: position ),
+
           const Positioned(
-            bottom: 8.0,
+            bottom: 16.0,
             right: 16.0,
             child: MapsButtonsWidget()
           )
