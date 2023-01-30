@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: ( context ) => GpsBloc() ),
         BlocProvider(create: ( context ) => LocationBloc() ),
-        BlocProvider(create: ( context ) => MapsBloc() ),
+        BlocProvider(create: ( context ) => MapsBloc( locationBloc: context.read<LocationBloc>() )),
       ], 
       child: const FindMeApp()
     );

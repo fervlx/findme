@@ -15,9 +15,9 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   LocationBloc() : super( const LocationState() ) {
     
-    on<OnStartLiveLocation>(( event, emit ) => emit( state.copyWith( liveLocation: true )));
+    on<OnStartFollowing>(( event, emit ) => emit( state.copyWith( isFollowingPosition: true )));
 
-    on<OnStopLiveLocation>(( event, emit ) => emit( state.copyWith( liveLocation: false )));
+    on<OnStopFollowing>(( event, emit ) => emit( state.copyWith( isFollowingPosition: false )));
 
     on<OnNewLocation>(( event, emit ) {
       emit( state.copyWith( 
@@ -36,7 +36,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   void initLiveLocation() {
 
-    add( OnStartLiveLocation() );
+    add( OnStartFollowing() );
     
     _subscription = Geolocator.getPositionStream().listen(( position ) { 
       add( OnNewLocation( location: LatLng( position.latitude, position.longitude )));
@@ -45,7 +45,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
 
   void stopLiveLocation() {
-    add( OnStopLiveLocation() );
+    add( OnStopFollowing() );
     _subscription?.cancel();
   }
 

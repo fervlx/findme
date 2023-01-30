@@ -19,6 +19,27 @@ class MapsButtonsWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        
+        FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+            if ( locationBloc.state.isFollowingPosition ) return;
+            locationBloc.add( OnStartFollowing() );
+          },
+          child: BlocBuilder<LocationBloc, LocationState>(
+            builder: ( context, state ) {
+              return Icon( 
+                state.isFollowingPosition 
+                  ? Icons.directions_run_rounded
+                  : Icons.hail_rounded, 
+                color: Colors.black
+              );
+            },
+          )
+        ),
+
+        const SizedBox( height: 8.0 ),
+
         FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: () {
@@ -33,7 +54,8 @@ class MapsButtonsWidget extends StatelessWidget {
             
             mapsBloc.moveCamera( position: position );
           },
-          child: const Icon( Icons.gps_fixed_outlined, color: Colors.black ))
+          child: const Icon( Icons.gps_fixed_outlined, color: Colors.black )
+        )
       ],
     );
   }

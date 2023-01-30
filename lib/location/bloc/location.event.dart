@@ -14,6 +14,6 @@ class OnNewLocation extends LocationEvent {
   const OnNewLocation({ required this.location });
 }
 
-class OnStartLiveLocation extends LocationEvent { }
+class OnStartFollowing extends LocationEvent { }
 
-class OnStopLiveLocation extends LocationEvent { }
+class OnStopFollowing extends LocationEvent { }

@@ -1,3 +1,4 @@
+import 'package:find_me/location/bloc/location.bloc.dart';
 import 'package:find_me/location/bloc/maps.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,16 +24,20 @@ class MapsWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     MapsBloc mapsBloc = context.read<MapsBloc>();
+    LocationBloc locationBloc = context.read<LocationBloc>();
 
     return SizedBox(
       height: size.height,
       width: size.width,
-      child: GoogleMap(
-        initialCameraPosition: initialPosition,
-        zoomControlsEnabled: false,
-        myLocationButtonEnabled: false,
-        myLocationEnabled: true,
-        onMapCreated: ( controller ) => mapsBloc.add( OnInitializedMap( controller )),
+      child: Listener(
+        onPointerMove: ( _ ) => locationBloc.add( OnStopFollowing() ),
+        child: GoogleMap(
+          initialCameraPosition: initialPosition,
+          zoomControlsEnabled: false,
+          myLocationButtonEnabled: false,
+          myLocationEnabled: true,
+          onMapCreated: ( controller ) => mapsBloc.add( OnInitializedMap( controller )),
+        ),
       ),
     );
   }
