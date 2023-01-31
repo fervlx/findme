@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'package:find_me/location/bloc/maps.bloc.dart';
 import 'package:find_me/location/bloc/location.bloc.dart';
 import 'package:find_me/location/ui/widgets/maps.buttons.widget.dart';
 import 'package:find_me/location/ui/widgets/maps.widget.dart';
@@ -72,7 +73,21 @@ class _LocationViewState extends State<LocationView> {
       child: Stack(
         children: [
           
-          MapsWidget( position: position ),
+          BlocBuilder<MapsBloc, MapsState>(
+            builder: (context, state) {
+
+              final polylines = Map<String,Polyline>.from( state.polylines );
+
+              if ( !state.showMyRoute ) {
+                polylines.remove('new_route');
+              }
+
+              return MapsWidget( 
+                position: position,
+                polyline: polylines.values.toSet(),
+              );
+            },
+          ),
 
           const Positioned(
             bottom: 16.0,

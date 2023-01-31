@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:find_me/location/bloc/location.bloc.dart';
@@ -15,20 +17,27 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   
   final LocationBloc locationBloc;
   GoogleMapController? _mapController;
-
+  StreamSubscription? _subscription;
+  
   MapsBloc({ required this.locationBloc }) : super( const MapsState( isMapInitialized: false )) {
     
-    locationBloc.stream.listen(( locationState ) { 
+    _subscription = locationBloc.stream.listen(( locationState ) { 
 
       if ( locationState.currentLocation == null ) return;
+
+      add( OnAddRoute( locationState.locationsHistory ));
+
       if ( !locationState.isFollowingPosition ) return;
 
       moveCamera( position: locationState.currentLocation! );
     });
 
     on<OnInitializedMap>( _onInitializedMap );
-  }
 
+    on<OnAddRoute>( _onAddRoute );
+
+    on<OnChangeShowRoute>(( event, emit ) => emit( state.copyWith( showMyRoute: !state.showMyRoute )));
+  }
 
   void _onInitializedMap( OnInitializedMap event, Emitter<MapsState> emit ) {
     _mapController = event.mapController;
@@ -36,9 +45,32 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
 
     emit( state.copyWith( isMapInitialized: true ));
   }
+  
+  void _onAddRoute( OnAddRoute event, Emitter<MapsState> emit ) {
+
+    final polyline = Polyline(
+      polylineId: const PolylineId('new_route'),
+      color: Colors.black,
+      width: 5,
+      endCap: Cap.roundCap,
+      startCap: Cap.roundCap,
+      points: event.points
+    );
+
+    final polylines = Map<String,Polyline>.from( state.polylines );
+    polylines['new_route'] = polyline;
+
+    emit( state.copyWith( polylines: polylines ));
+  }
 
 
   void moveCamera({ required LatLng position }) {
     _mapController?.moveCamera( CameraUpdate.newLatLng( position ));
+  }
+
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
   }
 }

@@ -3,24 +3,29 @@ part of 'maps.bloc.dart';
 class MapsState extends Equatable {
   
   final bool isMapInitialized;
-  //final bool focusOnPosition;
-  
+  final bool showMyRoute;
+  final Map<String,Polyline> polylines;
+
   const MapsState({
-    required this.isMapInitialized, 
-    //required this.focusOnPosition 
-  });
+    required this.isMapInitialized,
+    Map<String,Polyline>? polylines,
+    bool? showMyRoute
+  }) : polylines = polylines ?? const {}, showMyRoute = showMyRoute ?? true;
 
   MapsState copyWith({
     bool? isMapInitialized,
-    bool? focusOnPosition,
+    Map<String,Polyline>? polylines,
+    bool? showMyRoute
   }) => MapsState(
-    isMapInitialized: isMapInitialized ?? this.isMapInitialized, 
-    //focusOnPosition: focusOnPosition ?? this.focusOnPosition
+    isMapInitialized: isMapInitialized ?? this.isMapInitialized,
+    polylines: polylines ?? this.polylines,
+    showMyRoute: showMyRoute ?? this.showMyRoute
   );
 
   @override
   List<Object> get props => [
     isMapInitialized,
-    //focusOnPosition
+    polylines,
+    showMyRoute
   ];
 }

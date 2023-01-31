@@ -7,10 +7,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapsWidget extends StatelessWidget {
 
   final LatLng position;
-  
+  final Set<Polyline> polyline;
+
   const MapsWidget({ 
     Key? key,
-    required this.position 
+    required this.position,
+    required this.polyline 
   }) : super( key: key );
 
   @override
@@ -36,6 +38,7 @@ class MapsWidget extends StatelessWidget {
           zoomControlsEnabled: false,
           myLocationButtonEnabled: false,
           myLocationEnabled: true,
+          polylines: polyline,
           onMapCreated: ( controller ) => mapsBloc.add( OnInitializedMap( controller )),
         ),
       ),

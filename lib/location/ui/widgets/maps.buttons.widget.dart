@@ -22,6 +22,23 @@ class MapsButtonsWidget extends StatelessWidget {
         
         FloatingActionButton(
           backgroundColor: Colors.white,
+          onPressed: () => mapsBloc.add( OnChangeShowRoute() ),
+          child: BlocBuilder<MapsBloc, MapsState>(
+            builder: ( context, state ) {
+              return Icon( 
+                state.showMyRoute 
+                  ? Icons.directions_off_outlined
+                  : Icons.directions_outlined, 
+                color: Colors.black
+              );
+            },
+          )
+        ),
+
+        const SizedBox( height: 8.0 ),
+
+        FloatingActionButton(
+          backgroundColor: Colors.white,
           onPressed: () {
             if ( locationBloc.state.isFollowingPosition ) return;
             locationBloc.add( OnStartFollowing() );
