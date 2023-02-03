@@ -1,4 +1,3 @@
-import 'package:find_me/location/ui/widgets/custom.search.bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,6 +6,8 @@ import 'package:find_me/location/bloc/maps.bloc.dart';
 import 'package:find_me/location/bloc/location.bloc.dart';
 import 'package:find_me/location/ui/widgets/maps.buttons.widget.dart';
 import 'package:find_me/location/ui/widgets/maps.widget.dart';
+import 'package:find_me/location/ui/widgets/custom.search.bar.dart';
+import 'package:find_me/location/helpers/search.site.delegate.dart';
 
 
 class LocationView extends StatefulWidget {
@@ -96,11 +97,14 @@ class _LocationViewState extends State<LocationView> {
             child: MapsButtonsWidget()
           ),
 
-          const Positioned(
-              top: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: CustomSearchBar()
+          Positioned(
+            top: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child: GestureDetector(
+              child: const CustomSearchBar(),
+              onTap: () => showSearch(context: context, delegate: SearchSiteDelegate()),
+            )
           ),
         ],
       ),

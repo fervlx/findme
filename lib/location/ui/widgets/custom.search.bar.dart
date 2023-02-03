@@ -9,6 +9,7 @@ class CustomSearchBar extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only( left: 16.0, right: 16.0, top: 8.0 ),
+        padding: const EdgeInsets.only( left: 16.0, right: 16.0, top: 10.0 ),
         width: double.infinity,
         height: 46.0,
         decoration: BoxDecoration(
@@ -22,6 +23,9 @@ class CustomSearchBar extends StatelessWidget {
               offset: Offset( 0,2 )
             )
           ]
+        ),
+        child: Text('Buscar dirección', maxLines: 1, overflow: TextOverflow.ellipsis,
+          style: TextStyle( fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black.withOpacity( .6 )),
         ),
       ),
     );

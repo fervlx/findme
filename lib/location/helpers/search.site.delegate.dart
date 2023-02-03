@@ -2,28 +2,35 @@ import 'package:flutter/material.dart';
 
 class SearchSiteDelegate extends SearchDelegate {
 
+  SearchSiteDelegate() : super(searchFieldLabel: 'Buscar', searchFieldStyle: const TextStyle( fontSize: 18.0 ));
+
   @override
   List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    throw UnimplementedError();
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () => query = ''
+        ,
+      ),
+    ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    throw UnimplementedError();
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => close(context, null),
+    );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
+    return ListTile(title: Text('Result'));
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
+    return ListTile(title: Text('suggestion'));
   }
 
 }
