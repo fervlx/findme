@@ -1,3 +1,4 @@
+import 'package:find_me/location/ui/widgets/custom.search.bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -93,7 +94,14 @@ class _LocationViewState extends State<LocationView> {
             bottom: 16.0,
             right: 16.0,
             child: MapsButtonsWidget()
-          )
+          ),
+
+          const Positioned(
+              top: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: CustomSearchBar()
+          ),
         ],
       ),
     );
