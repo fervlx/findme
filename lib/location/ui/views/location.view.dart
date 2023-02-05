@@ -1,3 +1,4 @@
+import 'package:find_me/location/ui/widgets/manual.marker.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -103,9 +104,17 @@ class _LocationViewState extends State<LocationView> {
             right: 0.0,
             child: GestureDetector(
               child: const CustomSearchBar(),
-              onTap: () => showSearch(context: context, delegate: SearchSiteDelegate()),
+              onTap: () async {
+                final result = await showSearch(context: context, delegate: SearchSiteDelegate());
+
+                if ( result == null ) return;
+
+                print( result );
+              }
             )
           ),
+
+          ManualMakerWidget()
         ],
       ),
     );

@@ -1,6 +1,7 @@
+import 'package:find_me/location/models/search.result.dart';
 import 'package:flutter/material.dart';
 
-class SearchSiteDelegate extends SearchDelegate {
+class SearchSiteDelegate extends SearchDelegate<SearchResult> {
 
   SearchSiteDelegate() : super(searchFieldLabel: 'Buscar', searchFieldStyle: const TextStyle( fontSize: 18.0 ));
 
@@ -19,7 +20,7 @@ class SearchSiteDelegate extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.arrow_back),
-      onPressed: () => close(context, null),
+      onPressed: () => close(context, SearchResult(cancel: true)),
     );
   }
 
