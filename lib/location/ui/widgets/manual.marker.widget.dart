@@ -1,9 +1,29 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:animate_do/animate_do.dart';
+import 'package:find_me/blocs.dart';
 
 class ManualMakerWidget extends StatelessWidget {
-
+  
   const ManualMakerWidget({ Key? key }) : super( key: key );
+
+  @override
+  Widget build( BuildContext context ) {
+    
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: ( context, state ) => 
+        state.isSelectionManual 
+          ? const _ManualMakerWidget()
+          : const SizedBox()
+    );
+  }
+}
+
+
+class _ManualMakerWidget extends StatelessWidget {
+
+  const _ManualMakerWidget({ Key? key }) : super( key: key );
 
   @override
   Widget build( BuildContext context ) {
@@ -16,9 +36,9 @@ class ManualMakerWidget extends StatelessWidget {
         children: [
 
           Positioned(
-            left: 16.0,
+            right: 16.0,
             child: SafeArea(
-              child: _getCancelButton()
+              child: _getCancelButton( context )
             )
           ),
 
@@ -50,7 +70,8 @@ class ManualMakerWidget extends StatelessWidget {
     );
   }
 
-  Widget _getCancelButton() {
+
+  Widget _getCancelButton( BuildContext context ) {
 
     return FadeInLeft(
       duration: const Duration( milliseconds: 300 ),
@@ -59,8 +80,8 @@ class ManualMakerWidget extends StatelessWidget {
         backgroundColor: Colors.white,
         child: Center(
           child: IconButton(
-            onPressed: () { }, 
-            icon: const Icon( Icons.arrow_back_ios )
+            onPressed: () => context.read<SearchBloc>().add( OnCancelManualSelect() ), 
+            icon: const Icon( Icons.close )
           ),
         ),
       ),

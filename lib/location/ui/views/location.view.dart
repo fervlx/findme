@@ -114,7 +114,7 @@ class _LocationViewState extends State<LocationView> {
             )
           ),
 
-          ManualMakerWidget()
+          const ManualMakerWidget()
         ],
       ),
     );

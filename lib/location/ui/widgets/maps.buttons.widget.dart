@@ -1,3 +1,4 @@
+import 'package:find_me/location/bloc/search.bloc.dart';
 import 'package:find_me/ui/custom.snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,12 +16,23 @@ class MapsButtonsWidget extends StatelessWidget {
     
     final locationBloc = context.read<LocationBloc>();
     final mapsBloc = context.read<MapsBloc>();
+    final searchBloc = context.read<SearchBloc>();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        
+
         FloatingActionButton(
+          heroTag: UniqueKey(),
+          backgroundColor: Colors.white,
+          onPressed: () => searchBloc.add( OnManualSelect() ),
+          child: const Icon( Icons.edit_location_alt_outlined )
+        ),
+
+        const SizedBox( height: 8.0 ),
+
+        FloatingActionButton(
+          heroTag: UniqueKey(),
           backgroundColor: Colors.white,
           onPressed: () => mapsBloc.add( OnChangeShowRoute() ),
           child: BlocBuilder<MapsBloc, MapsState>(
@@ -38,6 +50,7 @@ class MapsButtonsWidget extends StatelessWidget {
         const SizedBox( height: 8.0 ),
 
         FloatingActionButton(
+          heroTag: UniqueKey(),
           backgroundColor: Colors.white,
           onPressed: () {
             if ( locationBloc.state.isFollowingPosition ) return;
@@ -58,6 +71,7 @@ class MapsButtonsWidget extends StatelessWidget {
         const SizedBox( height: 8.0 ),
 
         FloatingActionButton(
+          heroTag: UniqueKey(),
           backgroundColor: Colors.white,
           onPressed: () {
             

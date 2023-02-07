@@ -1,8 +1,31 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:find_me/blocs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class CustomSearchBar extends StatelessWidget {
 
   const CustomSearchBar({ Key? key }) : super( key: key );
+
+  @override
+  Widget build( BuildContext context ) {
+    return BlocBuilder<SearchBloc,SearchState>(
+      builder: ( context, state ) => 
+        state.isSelectionManual 
+          ? const SizedBox()
+          : FadeInDown(
+              duration: const Duration( milliseconds: 500 ),
+              child: const _CustomSearchBar()
+            )
+    );
+  }
+}
+
+
+class _CustomSearchBar extends StatelessWidget {
+
+  const _CustomSearchBar({ Key? key }) : super( key: key );
 
   @override
   Widget build( BuildContext context ) {

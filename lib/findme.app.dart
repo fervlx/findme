@@ -16,9 +16,6 @@ class FindMeApp extends StatelessWidget {
       ),
       home: const Scaffold(
         body: GpsStatusView()
-        // SafeArea(
-        //   child: GpsStatusView()
-        // ),
       ),
     );
   }

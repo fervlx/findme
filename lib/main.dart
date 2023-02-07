@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:find_me/gps/bloc/gps.bloc.dart';
-import 'package:find_me/location/bloc/location.bloc.dart';
-import 'package:find_me/location/bloc/maps.bloc.dart';
-
 import 'package:find_me/findme.app.dart';
+
+import 'blocs.dart';
 
 
 void main() {
@@ -23,6 +21,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: ( context ) => GpsBloc() ),
         BlocProvider(create: ( context ) => LocationBloc() ),
         BlocProvider(create: ( context ) => MapsBloc( locationBloc: context.read<LocationBloc>() )),
+        BlocProvider(create: ( context ) => SearchBloc()),
       ], 
       child: const FindMeApp()
     );
