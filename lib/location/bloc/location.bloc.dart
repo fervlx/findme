@@ -28,6 +28,13 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   }
 
 
+  Future<LatLng?> getLastKnownPosition() async {
+    final position = await Geolocator.getLastKnownPosition();
+
+    if ( position == null ) return null;
+    return LatLng( position.latitude, position.longitude );
+  }
+
   Future<void> getCurrentPosition() async {
     final position = await Geolocator.getCurrentPosition();
     log('position $position' );

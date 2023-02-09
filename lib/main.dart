@@ -1,3 +1,4 @@
+import 'package:find_me/services/mapbox.api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: ( context ) => GpsBloc() ),
         BlocProvider(create: ( context ) => LocationBloc() ),
         BlocProvider(create: ( context ) => MapsBloc( locationBloc: context.read<LocationBloc>() )),
-        BlocProvider(create: ( context ) => SearchBloc()),
+        BlocProvider(create: ( context ) => SearchBloc( mapboxApi: MapboxApi() )),
       ], 
       child: const FindMeApp()
     );

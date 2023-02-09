@@ -18,6 +18,7 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   final LocationBloc locationBloc;
   GoogleMapController? _mapController;
   StreamSubscription? _subscription;
+  LatLng? centerPosition;
   
   MapsBloc({ required this.locationBloc }) : super( const MapsState( isMapInitialized: false )) {
     

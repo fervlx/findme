@@ -49,7 +49,7 @@ class _ManualMakerWidget extends StatelessWidget {
             bottom: 16.0,
             right: 94.0,
             child: SafeArea(
-              child: _getSelectButton( size )
+              child: _getSelectButton( context: context, size: size )
             )
           )
         ],
@@ -89,8 +89,12 @@ class _ManualMakerWidget extends StatelessWidget {
   }
 
 
-  Widget _getSelectButton( Size size ) {
+  Widget _getSelectButton({ required BuildContext context, required Size size }) {
 
+    final locationBloc = context.read<LocationBloc>();
+    final mapsBloc = context.read<MapsBloc>();
+    final searchBloc = context.read<SearchBloc>();
+    
     return FadeInUp(
       duration: const Duration( milliseconds: 500 ),
       child: ElevatedButton(
@@ -98,7 +102,14 @@ class _ManualMakerWidget extends StatelessWidget {
           backgroundColor: Colors.black,
           minimumSize: Size( size.height / 2, 40 )
         ),
-        onPressed: () { },
+        onPressed: () async { 
+          
+          final start = await locationBloc.getLastKnownPosition();
+          if ( start == null ) return;  
+
+          final end = mapsBloc.centerPosition;
+          if ( end == null ) return;
+        },
         child: const Text('Aceptar',
           style: TextStyle( color:  Colors.white ),
         )

@@ -40,6 +40,7 @@ class MapsWidget extends StatelessWidget {
           myLocationEnabled: true,
           polylines: polyline,
           onMapCreated: ( controller ) => mapsBloc.add( OnInitializedMap( controller )),
+          onCameraMove: ( position ) => mapsBloc.centerPosition = position.target,
         ),
       ),
     );
