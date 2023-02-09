@@ -35,6 +35,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     return LatLng( position.latitude, position.longitude );
   }
 
+
   Future<void> getCurrentPosition() async {
     final position = await Geolocator.getCurrentPosition();
     log('position $position' );
