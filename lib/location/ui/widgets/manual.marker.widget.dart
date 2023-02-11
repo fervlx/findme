@@ -109,6 +109,9 @@ class _ManualMakerWidget extends StatelessWidget {
 
           final end = mapsBloc.centerPosition;
           if ( end == null ) return;
+
+          await searchBloc.getRoute( start: start, end: end );
+          
         },
         child: const Text('Aceptar',
           style: TextStyle( color:  Colors.white ),

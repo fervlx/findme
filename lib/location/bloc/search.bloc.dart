@@ -18,7 +18,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<OnCancelManualSelect>((event, emit) => emit( state.copyWith( isSelectionManual: false )));
   }
 
-  Future getRoute({ required LatLng start, required LatLng end }) async {
-    mapboxApi.getRoute( start: start, end: end );
-  }
+  Future getRoute({ required LatLng start, required LatLng end }) => mapboxApi.getRoute( start: start, end: end );
+  
 }
