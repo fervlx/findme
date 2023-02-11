@@ -18,13 +18,7 @@ Go to [Maps platform](https://mapsplatform.google.com/) and create an apikey for
  ### Add Mapbox key
  This app uses mapbox directions api for get and draw routes, so you need a [mapbox key](https://account.mapbox.com/). Add the key in (../lib/services/mapbox.dio.dart)
  
- `class MapboxInterceptor extends Interceptor {
-
-  final accessToken = "";
-  
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler)`
- 
+  `final accessToken = "";` 
  
  ## Screen
  ![screen-1](https://user-images.githubusercontent.com/1006732/215746274-0900b161-afb6-4dc5-8b32-b5823d484785.png)
