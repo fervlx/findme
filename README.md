@@ -16,7 +16,7 @@ Go to [Maps platform](https://mapsplatform.google.com/) and create an apikey for
             android:value="YOUR API KEY"/>`
  
  ### Add Mapbox key
- This app uses mapbox drirections api for get and draw routes, so you need a [mapbox key](https://account.mapbox.com/). Add the in (../lib/services/mapbox.dio.dart)
+ This app uses mapbox directions api for get and draw routes, so you need a [mapbox key](https://account.mapbox.com/). Add the key in (../lib/services/mapbox.dio.dart)
  
  `class MapboxInterceptor extends Interceptor {
 
