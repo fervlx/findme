@@ -23,7 +23,8 @@ Go to [Maps platform](https://mapsplatform.google.com/) and create an apikey for
   final accessToken = "";
   
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {...`
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler)`
+ 
  
  ## Screen
  ![screen-1](https://user-images.githubusercontent.com/1006732/215746274-0900b161-afb6-4dc5-8b32-b5823d484785.png)
