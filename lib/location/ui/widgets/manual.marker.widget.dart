@@ -110,7 +110,10 @@ class _ManualMakerWidget extends StatelessWidget {
           final end = mapsBloc.centerPosition;
           if ( end == null ) return;
 
-          await searchBloc.getRoute( start: start, end: end );
+          final route = await searchBloc.getRoute( start: start, end: end );
+
+          if ( route == null ) return;
+          mapsBloc.add( OnAddRoute( points: route.points, routeName: 'site_route' ));
           
         },
         child: const Text('Aceptar',

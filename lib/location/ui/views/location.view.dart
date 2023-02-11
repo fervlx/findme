@@ -82,7 +82,7 @@ class _LocationViewState extends State<LocationView> {
               final polylines = Map<String,Polyline>.from( state.polylines );
 
               if ( !state.showMyRoute ) {
-                polylines.remove('new_route');
+                polylines.remove('my_route');
               }
 
               return MapsWidget( 

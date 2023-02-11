@@ -16,7 +16,9 @@ class OnInitializedMap extends MapsEvent {
 class OnAddRoute extends MapsEvent {
 
   final List<LatLng> points;
-  const OnAddRoute( this.points );
+  final String routeName;
+
+  const OnAddRoute({ required this.points, required this.routeName });
 }
 
 class OnChangeShowRoute extends MapsEvent {}

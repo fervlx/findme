@@ -22,11 +22,11 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   
   MapsBloc({ required this.locationBloc }) : super( const MapsState( isMapInitialized: false )) {
     
-    _subscription = locationBloc.stream.listen(( locationState ) { 
+    _subscription = locationBloc.stream.listen(( locationState ) {
 
       if ( locationState.currentLocation == null ) return;
 
-      add( OnAddRoute( locationState.locationsHistory ));
+      add( OnAddRoute( points: locationState.locationsHistory, routeName: 'my_route' ));
 
       if ( !locationState.isFollowingPosition ) return;
 
@@ -50,7 +50,7 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   void _onAddRoute( OnAddRoute event, Emitter<MapsState> emit ) {
 
     final polyline = Polyline(
-      polylineId: const PolylineId('new_route'),
+      polylineId: PolylineId( event.routeName ),
       color: Colors.black,
       width: 5,
       endCap: Cap.roundCap,
@@ -59,7 +59,7 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
     );
 
     final polylines = Map<String,Polyline>.from( state.polylines );
-    polylines['new_route'] = polyline;
+    polylines[event.routeName] = polyline;
 
     emit( state.copyWith( polylines: polylines ));
   }
