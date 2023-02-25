@@ -3,15 +3,18 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:find_me/location/models/mapbox.response.dart';
-import 'package:find_me/services/mapbox.dio.dart';
+import 'package:find_me/services/mapbox.routes.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 
 
 class MapboxApi {
 
-  final Dio _dio;
+  final Dio _dioRoutes;
+  final Dio _dioPlaces;
 
-  MapboxApi() : _dio = MapboxDio.createInstance();
+  MapboxApi() : 
+    _dioRoutes = MapboxDio().createRoutesInstance(),
+    _dioPlaces = MapboxDio().createPlacesInstance();
 
   Future<MapboxResponse?> getRoute({ required LatLng start, required LatLng end }) async {
     
@@ -20,7 +23,7 @@ class MapboxApi {
 
     try {
 
-      final response = await _dio.get( url );
+      final response = await _dioRoutes.get( url );
 
       if ( response.statusCode != HttpStatus.ok ) return null;
       return MapboxResponse.fromJson( response.data );
@@ -30,5 +33,9 @@ class MapboxApi {
     }
 
     return null;
+  }
+
+  Future getPlaces({ required LatLng proximity, required String query }) async {
+    
   }
 }

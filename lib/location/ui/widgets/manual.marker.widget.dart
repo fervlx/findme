@@ -1,3 +1,4 @@
+import 'package:find_me/location/helpers/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -110,8 +111,17 @@ class _ManualMakerWidget extends StatelessWidget {
           final end = mapsBloc.centerPosition;
           if ( end == null ) return;
 
-          final route = await searchBloc.getRoute( start: start, end: end );
+          if ( context.mounted ) {
+            showGettingRoute( context );
+          }
 
+          final route = await searchBloc.getRoute( start: start, end: end );
+          searchBloc.add( OnCancelManualSelect() );
+
+          if ( context.mounted ) {
+            Navigator.pop( context );
+          }
+          
           if ( route == null ) return;
           mapsBloc.add( OnAddRoute( points: route.points, routeName: 'site_route' ));
           
